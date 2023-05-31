@@ -118,10 +118,14 @@ export function MongooseAdapter(uri: string): Adapter {
       return from<AdapterSession>(session)
     },
     async updateSession(data) {
-      const session = await SessionModel.findOneAndUpdate({
-        sessionToken: data.sessionToken,
-        expires: data.expires,
-      })
+      const session = await SessionModel.findOneAndUpdate(
+        {
+          sessionToken: data.sessionToken,
+        },
+        {
+          expires: data.expires,
+        }
+      );
       return from<AdapterSession>(session)
     },
     async deleteSession(sessionToken) {
